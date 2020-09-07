@@ -21,9 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::view('/{path?}', 'app');
 
 Route::get('/test', function () {
     dd(App\ResourceGroup::all()->pluck('name')->toArray());
