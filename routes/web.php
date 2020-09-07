@@ -21,8 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::view('/{path?}', 'app');
+// Route::view('/{path?}', 'app');
 
 Route::get('/test', function () {
-    dd(App\ResourceGroup::all()->pluck('name')->toArray());
+    $x = bin2hex(random_bytes(rand(30,50)));
+    dd(strlen($x), $x, strlen("18446744073709551615"));
 });
