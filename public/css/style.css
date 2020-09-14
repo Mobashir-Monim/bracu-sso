@@ -50,7 +50,7 @@ body {
 }
   
 .sidebar .nav-link.active {
-    color: #007bff;
+    color: #007bff !important;
 }
   
 .sidebar .nav-link:hover .feather,
@@ -94,4 +94,45 @@ body {
 
 .navbar {
     z-index: 101;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #91989e;
+    background-color: #38c172 !important;
+}
+
+.custom-control-input ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #91989e;
+    background-color: #e3342f !important;
+}
+
+.hoverable-card {
+    box-shadow: 4px 7px 7px #ccc;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.hoverable-card:hover {
+    box-shadow: 4px 10px 10px #ccc;
+}
+
+.add-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    text-align: center;
+    padding: 5px !important;
+    vertical-align: middle !important;
+    background-image: url('../img/plus.svg');
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-origin: content-box !important;
+    transition: ease-in-out 0.25s;
+    box-shadow: 3px 3px 5px #3490dc;
+    z-index: 3 !important;
 }

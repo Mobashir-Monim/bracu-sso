@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateResourcesTable extends Migration
+class CreateScopeDataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('resources', function (Blueprint $table) {
+        Schema::create('scope_data', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('resource_group_id');
-            $table->string('name', 80);
-            $table->string('description')->nullable();
-            $table->mediumText('uri');
-            $table->boolean('is_active')->default(true);
+            $table->unsignedInteger('scope_id');
+            $table->unsignedInteger('additional_attribute_id');
+            $table->string('label')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('resources');
+        Schema::dropIfExists('scope_data');
     }
 }
