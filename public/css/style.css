@@ -136,3 +136,11 @@ body {
     box-shadow: 3px 3px 5px #3490dc;
     z-index: 3 !important;
 }
+
+.switch-wrapper {
+    position: relative;
+}
+   
+.switch-wrapper > div {
+    position: absolute;
+}
