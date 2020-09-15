@@ -110,11 +110,21 @@ body {
 
 .hoverable-card {
     box-shadow: 4px 7px 7px #ccc;
-    transition: box-shadow 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    height: 250px;
+    width: 250px;
+    display: inline-block;
 }
 
+
 .hoverable-card:hover {
-    box-shadow: 4px 10px 10px #ccc;
+    box-shadow: 4px 10px 10px #aaa;
+    height: 260px;
+    width: 260px;
+    margin-top: calc(1rem - 10px) !important;
+    margin-bottom: calc(1rem - 10px) !important;
+    margin-right: calc(1rem - 5px) !important;
+    margin-left: calc(1rem - 5px) !important;
 }
 
 .add-btn {
@@ -137,10 +147,69 @@ body {
     z-index: 3 !important;
 }
 
+.tick-btn {
+    color: white !important;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    display: inline-block;
+    text-align: center;
+    padding: 1px !important;
+    vertical-align: middle !important;
+    background-image: url('../img/tick.svg');
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-origin: content-box !important;
+}
+
+.cancel-btn {
+    color: white !important;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    display: inline-block;
+    text-align: center;
+    padding: 5px !important;
+    vertical-align: middle !important;
+    background-image: url('../img/cancel.svg');
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-origin: content-box !important;
+}
+
 .switch-wrapper {
     position: relative;
+    width: 100% !important;
 }
    
 .switch-wrapper > div {
     position: absolute;
+    width: 100% !important;
+}
+
+.access-log-row {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.access-log-row:hover {
+    background-color: #eee;
+    cursor: default;
+}
+
+.form-control {
+    border-radius: 25px;
+}
+
+.btn {
+    border-radius: 25px;
+}
+
+.left-col {
+    border-radius: 25px 0px 0px 25px !important;
+}
+
+.right-col {
+    border-radius: 0px 25px 25px 0px !important;
 }

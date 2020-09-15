@@ -1,12 +1,6 @@
 import React from 'react'
 
 function GroupCard({ name, image }) {
-    let cardStyle = {
-        height: '250px',
-        width: '250px',
-        display: 'inline-block'
-    }
-
     let imgContStyle = {
         height: '130px',
         backgroundImage: `url("${ image }")`,
@@ -17,7 +11,7 @@ function GroupCard({ name, image }) {
     }
 
     return (
-        <div className="card hoverable-card m-3" style={ cardStyle }>
+        <div className="card hoverable-card m-3">
             <div style={ imgContStyle } className="card-img-top">
             </div>
             <div className="card-body">
