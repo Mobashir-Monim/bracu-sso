@@ -4,7 +4,7 @@ export class Details extends Component {
     render() {
         return (
             <div>
-                
+                Yello!
             </div>
         )
     }

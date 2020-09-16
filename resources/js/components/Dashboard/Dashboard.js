@@ -43,10 +43,10 @@ class Dashboard extends Component {
             <div>
                 <h4>Dashboard</h4>
                 <div className="row mb-3">
-                    <div className="col-md-6">
+                    <div className="col-md-6 my-auto">
                         <ProfileInfo name={ this.state.name } email={ this.state.email } status={ this.state.status } toggler={ this.handleStatusToggle } />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 my-auto">
                         <PasswordReset />
                     </div>
                 </div>

@@ -8,7 +8,7 @@ function PasswordReset() {
     return (
         <div>
             <div className="card py-0" style={ cardStyle }>
-                <div className="card-body pb-1 pt-3">
+                <div className="card-body pb-1 pt-2">
                     <div className="row">
                         <div className="col-md-6 mb-2 pr-0">
                             <input type="password" className="form-control left-col" placeholder="Current Password" />

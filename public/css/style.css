@@ -198,6 +198,16 @@ body {
     cursor: default;
 }
 
+.scope-row {
+    transition: all 0.2s ease-in-out;
+}
+
+.scope-row:hover {
+    font-size: 1.05em;
+    background-color: #eee;
+    cursor: pointer;
+}
+
 .form-control {
     border-radius: 25px;
 }
@@ -212,4 +222,12 @@ body {
 
 .right-col {
     border-radius: 0px 25px 25px 0px !important;
+}
+
+.no-a {
+    color: inherit;
+}
+
+.no-a:hover {
+    text-decoration: none;
 }

@@ -29,28 +29,14 @@ class ResourceGroups extends Component {
     }
     
     render() {
-        let searchInputStyle = {
-            borderRadius: '25px',
-        }
-
-        let buttonStyle = {
-            borderRadius: '25px',
-            width: '40px',
-            height: '40px',
-            transformOrigin: '50% 50% 0',
-            padding: '0px'
-        }
-
         let groups = this.state.rgs.map(rg => <Link to={ `/rgroups/${ rg.id }` } key={ rg.id } className="text-left" ><GroupCard image={ rg.image } name={ rg.name } /></Link>);
 
         return (
             <div>
-                <div className="row mb-3">
-                    <div className="col-md-12 my-auto"><h4 className="mb-0">Resource Groups</h4></div>
-                </div>
                 <div className="row mb-4">
-                    <div className="col-md-4 offset-md-8 my-auto">
-                        <input type="text" style={ searchInputStyle } placeholder="Search for Resource Groups" className="form-control" />
+                    <div className="col-md-8 my-auto"><h4 className="mb-0">Resource Groups</h4></div>
+                    <div className="col-md-4 my-auto">
+                        <input type="text" placeholder="Search for Resource Groups" className="form-control" />
                     </div>
                 </div>
                 <div className="row">
