@@ -8,6 +8,7 @@ import Dashboard from './Dashboard/Dashboard'
 import ResourceGroups from './ResourceGroup/ResourceGroups'
 import ResourceGroup from './ResourceGroup/ResourceGroup'
 import Scope from './Scope/Scopes'
+import Details from './Scope/Details'
 import User from './User/User'
 import RolePermission from './RolePermission/RolePermission'
 
@@ -44,7 +45,8 @@ class App extends Component {
                                 <Route path="/" exact component={ Dashboard } />
                                 <Route path="/rgroups" exact component={ ResourceGroups } />
                                 <Route path="/rgroups/:id" component={ ResourceGroup } />
-                                <Route path="/scopes" component={ Scope } />
+                                <Route path="/scopes" exact component={ Scope } />
+                                <Route path="/scopes/:id" component={ Details } />
                                 <Route path="/users" component={ User } />
                                 <Route path="/rp" component={ RolePermission } />
                             </AnimatedSwitch>

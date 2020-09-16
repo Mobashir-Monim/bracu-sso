@@ -34,8 +34,8 @@ class Dashboard extends Component {
     render() {
         let logs = this.state.logs.map(log => <UserLog appName={log.name} rURL={log.rURL} dateTime={log.dateTime} key={log.id} />)
         const cardStyle = {
-            borderRadius: '25px',
-            maxHeight: '50vh',
+            borderRadius: '0px',
+            maxHeight: '60vh',
             overflowY: 'auto'
         }
 
@@ -53,8 +53,8 @@ class Dashboard extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h4>Access Logs</h4>
-                        <div className="card" style={ cardStyle }>
-                            <div className="card-body">
+                        <div className="card py-0" style={ cardStyle }>
+                            <div className="card-body py-0">
                                 { logs }
                             </div>
                         </div>
