@@ -15,7 +15,8 @@ class CreateScopesTable extends Migration
     {
         Schema::create('scopes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 80);
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

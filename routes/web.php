@@ -22,6 +22,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/test', function () {
+    dd(Laravel\Passport\Passport::client()->all());
+
     $x = bin2hex(random_bytes(rand(30,50)));
     // To create UUID, use this:
     // dd(Str::uuid()->toString());

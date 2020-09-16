@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Scope extends Component {
-    render() {
-        return (
-            <div>
-                Scopes
-            </div>
-        )
-    }
+function Scope({ name, description, info }) {
+    return (
+        <div className="row">
+            <div className="col-md-3"></div>
+        </div>
+    )
 }
 
 export default Scope

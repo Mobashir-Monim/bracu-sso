@@ -5,8 +5,9 @@ import { AnimatedSwitch } from 'react-router-transition'
 import Header from './Nav/Nav'
 import SideNav from './SideNav/SideNav'
 import Dashboard from './Dashboard/Dashboard'
+import ResourceGroups from './ResourceGroup/ResourceGroups'
 import ResourceGroup from './ResourceGroup/ResourceGroup'
-import Scope from './Scope/Scope'
+import Scope from './Scope/Scopes'
 import User from './User/User'
 import RolePermission from './RolePermission/RolePermission'
 
@@ -41,7 +42,8 @@ class App extends Component {
                             className="switch-wrapper"
                             >
                                 <Route path="/" exact component={ Dashboard } />
-                                <Route path="/rgroups" component={ ResourceGroup } />
+                                <Route path="/rgroups" exact component={ ResourceGroups } />
+                                <Route path="/rgroups/:id" component={ ResourceGroup } />
                                 <Route path="/scopes" component={ Scope } />
                                 <Route path="/users" component={ User } />
                                 <Route path="/rp" component={ RolePermission } />

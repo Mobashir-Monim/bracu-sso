@@ -12,8 +12,15 @@ class ResourceGroupSeeder extends Seeder
      */
     public function run()
     {
+        $clients = new Laravel\Passport\ClientRepository;
+
         for ($i = 1; $i <= rand(10,30); $i++) {
-            RG::create(['name' => "Resource Group $i", 'description' => Str::random(rand(30,255))]);
+            $client = $clients->create(
+                null, "Resource Group $i", "http://127.0.0.1:800$i",
+                null, false, true, true
+            );
+
+            RG::create(['name' => "Resource Group $i", 'description' => Str::random(rand(30,255)), 'uuid' => $client->id]);
         }
     }
 }
