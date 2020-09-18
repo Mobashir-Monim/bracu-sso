@@ -35,7 +35,7 @@ const SideNav = () => {
             <Link className="nav-item" to={item.path} key={item.path}>
                 <li className={`nav-link text-white ${currentPath == item.path ? "active" : ""}`}>
                     <i className={`fa ${item.className} pr-1`}></i>
-                    {item.name} {currentPath == item.path ? <span className="sr-only">(current)</span> : ""}
+                    { item.name } { currentPath == item.path ? <span className="sr-only">(current)</span> : "" }
                 </li>
             </Link>
         )
