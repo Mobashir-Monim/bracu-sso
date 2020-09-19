@@ -19,6 +19,7 @@ class CreateResourceGroupsTable extends Migration
             $table->mediumText('description')->nullable();
             $table->string('uuid');
             $table->string('url')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

@@ -13,7 +13,9 @@ class ResourceGroupController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'All resource groups retrieved',
-            'data' => RG::all()->pluck('name', 'id')->toArray(),
+            'data' => [
+                'rgs' => RG::get(['id', 'name', 'image'])->toArray(),
+            ],
         ]);
     }
 

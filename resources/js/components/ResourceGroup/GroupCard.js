@@ -3,7 +3,7 @@ import React from 'react'
 function GroupCard({ name, image }) {
     let imgContStyle = {
         height: '130px',
-        backgroundImage: `url("${ image }")`,
+        backgroundImage: `url("${ image == null ? '/img/rg-placeholder.png' : image }")`,
         backgroundColor: '#cccccc',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

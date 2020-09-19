@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import GroupCard from './GroupCard'
 import Create from './Create'
 
@@ -26,6 +27,16 @@ class ResourceGroups extends Component {
                     },
              ]
         }
+    }
+
+    componentDidMount() {
+        axios.get('/api/rgs')
+            .then(response => {
+                this.setState({ rgs: response.data.data.rgs })
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
     
     render() {
