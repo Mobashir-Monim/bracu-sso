@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ResourceGroup as RG;
-use App\Http\Requests\ResourceGroupController as RGR;
+use App\Http\Requests\ResourceGroupRequest as RGR;
 
 class ResourceGroupController extends Controller
 {
