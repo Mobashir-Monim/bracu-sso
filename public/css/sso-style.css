@@ -23,7 +23,7 @@ input:-moz-placeholder {
     text-align:right;
 }
 
-.card {
+.card-login {
     box-shadow: 5px 5px 5px #aaa;
     border-radius: 15px !important;
 }

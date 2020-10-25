@@ -17,13 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::get();
 
 Route::get('/test', function () {
+    $str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    dd(rand(1, 2));
+    $user = App\User::first();
+    dd(Laravel\Passport\Passport::authCode()->create(['user_id' => 1, 'client_id' => null,]));
     // $var = [
     //     "alg" => "HS256",
     //     "typ" => "JWT"
@@ -44,5 +48,6 @@ Route::get('/test', function () {
 Route::get('t', function () {
     return view('sso.login');
 });
+Route::get('/oauth2/v2/auth/{val}', 'SSOController@ssoLogin')->name('sso-login')->middleware('sso-login-session-checker');
 Route::post('/oauth2/v2/auth', 'SSOController@authenticate')->name('sso-authenticate');
-Route::view('/{path?}', 'welcome');
+// Route::view('/{path?}', 'welcome');
