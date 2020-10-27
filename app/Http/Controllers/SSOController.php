@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Helpers\SSOHelper;
 use App\Http\Requests\SSOLoginRequest as SLR;
 use Laravel\Passport\Passport;
+use App\PToken;
 
 class SSOController extends Controller
 {
@@ -43,6 +44,12 @@ class SSOController extends Controller
         $access_token = $helper->createAccessToken($auth_code->user_id, $auth_code->client_id, $auth_code->scopes, Passport::token());
 
         return response()->json($helper->exchangeCodeToken($auth_code, $access_token));
+    }
+
+    public function userInfo()
+    {
+        $token = PToken::find(request()->bearerToken());
+        return response()->json((new SSOHelper)->getUserInfo($token));
     }
 
     public function discoveryDoc()

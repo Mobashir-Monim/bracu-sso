@@ -5,6 +5,8 @@ namespace App\Helpers;
 use Carbon\Carbon;
 use Larave\Passport\Passport;
 use App\ResourceGroup;
+use App\User;
+use App\PToken;
 
 class SSOHelper extends Helper
 {
@@ -98,5 +100,35 @@ class SSOHelper extends Helper
             'expires_in' => 604800,
             'id_token' => generateIDToken($access_token),
         ];
+    }
+
+    public function getUserInfo($token)
+    {
+        $user = User::find($token->user_id);
+        $scopes = json_decode($token->scopes);
+        $user_info = ['sub' => $user->id];
+
+        if (in_array('email', $scopes)) {
+            $user_info['email'] = $user->email;
+        }
+        
+        if (in_array('name', $scopes)) {
+            $user_info['name'] = $user->name;
+        }
+
+        if (in_array('profile', $scopes)) {
+            $user_info['email'] = $user->email;
+            $user_info['name'] = $user->name;
+        }
+
+        // foreach ($scopes as $key => $scope) {
+        //     if ($scope != 'openid') {
+        //         // loop trough scope attributes
+        //             // if !array_key_exists(attribute, $user_info)
+        //                 // $user_info[attribute] = attribute value
+        //     }
+        // }
+
+        return $user_info;
     }
 }
