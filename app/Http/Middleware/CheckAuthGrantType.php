@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Laravel\Passport\Passport;
 
-class ClientChecker
+class CheckAuthGrantType
 {
     /**
      * Handle an incoming request.
@@ -16,10 +15,11 @@ class ClientChecker
      */
     public function handle($request, Closure $next)
     {
-        if (Passport::client()->where('id', $request->client_id)->first() != null) {
+        if ($request->grant_type != 'authorization_code') {
             return response()->json([
                 'success' => false,
-            ], 401);
+                'message' => 'bad_request'
+            ], 400);
         }
 
         return $next($request);

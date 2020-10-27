@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Laravel\Passport\Passport;
 
-class ClientChecker
+class VerifiySPCred
 {
     /**
      * Handle an incoming request.
@@ -16,12 +15,14 @@ class ClientChecker
      */
     public function handle($request, Closure $next)
     {
-        if (Passport::client()->where('id', $request->client_id)->first() != null) {
+        $client = Passport::client()->find($request->client_id);
+
+        if ($client->secret != $request->client_secret || $client->redirect_uri != $request->redirect_uri) {
             return response()->json([
                 'success' => false,
             ], 401);
         }
-
+        
         return $next($request);
     }
 }

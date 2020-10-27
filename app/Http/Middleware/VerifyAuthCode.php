@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Laravel\Passport\Passport;
 
-class ClientChecker
+class VerifyAuthCode
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,15 @@ class ClientChecker
      */
     public function handle($request, Closure $next)
     {
-        if (Passport::client()->where('id', $request->client_id)->first() != null) {
+        $authCode = Passport::authCode()->find(request()->code);
+
+        if (is_null($authCode)) {
+            return response()->json([
+                'success' => false,
+            ], 401);
+        }
+
+        if ($authCode->client_id != $request->client_id) {
             return response()->json([
                 'success' => false,
             ], 401);
