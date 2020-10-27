@@ -16,7 +16,7 @@ class ResourceGroupSeeder extends Seeder
 
         for ($i = 1; $i <= rand(10,30); $i++) {
             $client = $clients->create(
-                null, "Resource Group $i", "http://127.0.0.1:800$i",
+                null, "Resource Group $i", "http://127.0.0.1:800$i/callback",
                 null, false, true, true
             );
 

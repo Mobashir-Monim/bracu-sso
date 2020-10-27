@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Carbon\Carbon;
 use Larave\Passport\Passport;
+use App\ResourceGroup;
 
 class SSOHelper extends Helper
 {
@@ -30,7 +31,7 @@ class SSOHelper extends Helper
         return json_decode($this->base64url_decode($data));
     }
 
-    public function generateAuthCode($passportAuthCode)
+    public function generateRandID($checkingCont)
     {
         shuffle($this->varArr);
         $flag = true;
@@ -42,39 +43,60 @@ class SSOHelper extends Helper
                 $code .= $this->varArr[rand(0, 63)];
             }
 
-            $flag = !is_null($passportAuthCode->where('id', $code)->first());
+            $flag = !is_null($checkingCont->where('id', $code)->first());
         }
 
         return $code;
     }
 
+    public function generateIDToken($auth_code, $access_token)
+    {
+        return [
+            "iss" => url()->to('/'),
+            "azp" => $access_token->client_id,
+            "aud" => $access_token->client_id,
+            "sub" => $access_token->user_id,
+            "at_hash" => hash('sha256', $access_token->id),
+            "iat" => Carbon::now()->timestamp,
+            "exp" => Carbon::now()->timestamp + 604800,
+            "nonce" => $auth_code->nonce,
+        ];
+    }
+
     public function createAuthCode($val, $passportAuthCode)
     {
         return $passportAuthCode->create([
-            'id' => $this->generateAuthCode($passportAuthCode),
             'user_id' => auth()->user(),
             'client_id' => $val->client_id,
+            'nonce' => $val->nonce,
             'scopes' => is_null($val->scope) ? null : json_encode(explode(' ', $val->scope)),
             'revoked' => false,
             'expires_at' => Carbon::now()->addSeconds(60)
         ]);
     }
 
+    public function createAccessToken($user_id, $client_id, $scopes, $passportToken)
+    {
+        return $passportToken->create([
+            'user_id' => $user_id,
+            'client_id' => $client_id,
+            'scopes' => $scopes,
+            'name' => 'SSO login for ' . ResourceGroup::find($client_id)->name,
+            'expires_at' => Carbon::now()->addSeconds(604800)->toDateTimeString(),
+            'revoked' => false
+        ]);
+    }
 
+    public function exchangeCodeToken($auth_code, $access_token)
+    {
+        $auth_code->revoked = true;
+        $auth_code->save();
 
-    // public static function createUserAccessToken($user)
-    // {
-    //     $tokenResult = $user->createToken('Personal Access Token');
-    //     $token = $tokenResult->token;
-    //     $token->save();
-
-    //     return [
-    //         'token' => $tokenResult->accessToken,
-    //         'token_type' => 'Bearer',
-    //         'expires_at' => Carbon::parse(
-    //             $tokenResult->token->expires_at
-    //         )->toDateTimeString(),
-    //         'user' => ['name' => $user->name, 'email' => $user->email]
-    //     ];
-    // }
+        return [
+            'access_token' => $access_token->id,
+            'token_type' => 'Bearer',
+            'expires_in' => 604800,
+            'id_token' => generateIDToken($access_token),
+        ];
+    }
 }

@@ -21,13 +21,18 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/.well-known/openid-configuration', 'SSOController@discoveryDoc');
+Route::get('/oauth2/certs', 'SSOController@jwksDoc');
+
 // Route::get();
 
 Route::get('/test', function () {
-    $str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    dd(rand(1, 2));
-    $user = App\User::first();
-    dd(Laravel\Passport\Passport::authCode()->create(['user_id' => 1, 'client_id' => null,]));
+    // $user = App\User::find(1);
+    // $us = new Laravel\Passport\Passport;
+    // dd($user, $us);
+    // $user->createToken(['client_id' => 100, 'name' => 'test', 'scopes' => 'test']);
+    // $user = App\User::first();
+    // dd(Laravel\Passport\Passport::authCode()->create(['user_id' => 1, 'client_id' => null,]));
     // $var = [
     //     "alg" => "HS256",
     //     "typ" => "JWT"

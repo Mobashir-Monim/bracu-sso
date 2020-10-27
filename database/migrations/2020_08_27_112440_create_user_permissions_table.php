@@ -15,7 +15,7 @@ class CreateUserPermissionsTable extends Migration
     {
         Schema::create('user_permissions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
+            $table->uuid('user_id');
             $table->unsignedInteger('resource_id');
             $table->boolean('is_permitted')->default(true);
             $table->timestamps();

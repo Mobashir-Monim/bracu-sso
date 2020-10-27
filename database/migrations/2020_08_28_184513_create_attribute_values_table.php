@@ -15,7 +15,7 @@ class CreateAttributeValuesTable extends Migration
     {
         Schema::create('attribute_values', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
+            $table->uuid('user_id');
             $table->unsignedInteger('additional_attribute_id');
             $table->string('value');
             $table->timestamps();
