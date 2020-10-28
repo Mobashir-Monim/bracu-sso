@@ -28,4 +28,5 @@ Route::group(['prefix' => 'auth'], function () {
 Route::get('/rgs', 'ResourceGroupController@index');
 Route::get('/oauth2/auth', 'SSOController@authenticator');
 Route::get('/token', 'SSOController@exchangeCodeToken');
+Route::post('/token', 'SSOController@exchangeCodeToken');
 Route::get('/userinfo', 'SSOController@exchangeCodeToken');
