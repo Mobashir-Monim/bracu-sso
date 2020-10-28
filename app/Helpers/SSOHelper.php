@@ -33,6 +33,12 @@ class SSOHelper extends Helper
         return json_decode($this->base64url_decode($data));
     }
 
+    public function authenticateCreds($request)
+    {
+        $credentials = request(['email', 'password']);
+        return Auth::attempt($credentials);
+    }
+
     public function generateRandID($checkingCont)
     {
         shuffle($this->varArr);

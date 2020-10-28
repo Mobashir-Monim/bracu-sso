@@ -32,6 +32,11 @@ class SSOController extends Controller
     public function authenticate(SLR $request)
     {
         $helper = new SSOHelper;
+        
+        if (!$helper->authenticateCreds($request)) {
+            return back()->withErrors(['email' => 'Credentials do not match', 'password' => 'Credentials do not match']);
+        }
+
         $val = $helper->authenticatorParamDecompressor($request->stuff);
 
         return redirect($val->redirect_uri . '?state=' . $val->state . '&code=' . $helper->createAuthCode($val, Passport::authCode()) . '&scope=' . $val->scope);
