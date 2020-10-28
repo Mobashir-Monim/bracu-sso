@@ -112,6 +112,7 @@ class SSOHelper extends Helper
 
     public function exchangeCodeToken($auth_code, $access_token)
     {
+        dd(PClient::find($access_token->client_id)->secret);
         $auth_code->revoked = true;
         $auth_code->save();
 
