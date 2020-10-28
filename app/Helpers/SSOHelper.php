@@ -119,7 +119,7 @@ class SSOHelper extends Helper
             'access_token' => $access_token->id,
             'token_type' => 'Bearer',
             'expires_in' => 604800,
-            'id_token' => $this->generateIDToken($auth_code, $access_token),
+            'id_token' => $this->convertToJWT($this->generateIDToken($auth_code, $access_token)),
         ];
     }
 
