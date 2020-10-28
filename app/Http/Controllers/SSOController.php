@@ -33,9 +33,9 @@ class SSOController extends Controller
     {
         $helper = new SSOHelper;
         
-        if (!$helper->authenticateCreds($request)) {
-            return back()->withErrors(['email' => 'Credentials do not match', 'password' => 'Credentials do not match']);
-        }
+        // if (!$helper->authenticateCreds($request)) {
+        //     return back()->withErrors(['email' => 'Credentials do not match', 'password' => 'Credentials do not match']);
+        // }
 
         $val = $helper->authenticatorParamDecompressor($request->stuff);
 

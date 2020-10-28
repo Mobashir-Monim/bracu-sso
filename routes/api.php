@@ -26,7 +26,8 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::get('/rgs', 'ResourceGroupController@index');
-Route::get('/oauth2/auth', 'SSOController@authenticator');
-Route::get('/token', 'SSOController@exchangeCodeToken');
-Route::post('/token', 'SSOController@exchangeCodeToken');
-Route::get('/userinfo', 'SSOController@exchangeCodeToken');
+
+Route::get('/oauth2/auth', 'SSOController@authenticator')->middleware(['sso-auth-param-checker', 'sso-client-checker']);
+Route::get('/token', 'SSOController@exchangeCodeToken')->middleware(['sso-grant-type-checker', 'sso-client-checker', 'sso-verify-sp-cred', 'sso-verify-auth-code']);
+Route::post('/token', 'SSOController@exchangeCodeToken')->middleware(['sso-grant-type-checker', 'sso-client-checker', 'sso-verify-sp-cred', 'sso-verify-auth-code']);
+Route::get('/userinfo', 'SSOController@userInfo')->middleware(['access-token']);

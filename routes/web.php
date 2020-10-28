@@ -55,5 +55,5 @@ Route::get('t', function () {
     return view('sso.login');
 });
 Route::get('/oauth2/v2/auth/{val}', 'SSOController@ssoLogin')->name('sso-login')->middleware('sso-login-session-checker');
-Route::post('/oauth2/v2/auth', 'SSOController@authenticate')->name('sso-authenticate');
+Route::post('/oauth2/v2/auth', 'SSOController@authenticate')->name('sso-authenticate')->middleware('sso-cred-checker', 'sso-login-session-checker');
 // Route::view('/{path?}', 'welcome');

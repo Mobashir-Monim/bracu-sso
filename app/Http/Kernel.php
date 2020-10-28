@@ -63,6 +63,13 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'sso-auth-param-checker' => \App\Middleware\AuthorizationParamChecker::class,
+        'sso-grant-type-checker' => \App\Middleware\CheckAuthGrantType::class,
+        'sso-client-checker' => \App\Middleware\ClientChecker::class,
+        'sso-cred-checker' => \App\Middleware\SSOCredChecker::class,
         'sso-login-session-checker' => \App\Http\Middleware\SSOLoginSessionChecker::class,
+        'sso-verify-sp-cred' => \App\Middleware\VerifiySPCred::class,
+        'sso-verify-access-token' => \App\Middleware\VerifyAccessToken::class,
+        'sso-verify-auth-code' => \App\Middleware\VerifyAuthCode::class,
     ];
 }

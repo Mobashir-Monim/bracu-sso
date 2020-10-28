@@ -20,7 +20,7 @@ class SSOLoginSessionChecker
         $val = (new SSOHelper)->authenticatorParamDecompressor(request()->val);
         
         if (property_exists($val, 'timestamp')) {
-            if (!is_null($val->timestamp) && Carbon::parse($val->timestamp)->diffInSeconds(Carbon::now()) <= 30) {
+            if (!is_null($val->timestamp) && Carbon::parse($val->timestamp)->addSeconds(60) < Carbon::now()) {
                 return $next($request);
             }
         }

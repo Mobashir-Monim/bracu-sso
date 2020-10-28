@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Laravel\Passport\Passport;
 
-class VerifyAuthCode
+class VerifyAccessToken
 {
     /**
      * Handle an incoming request.
@@ -16,15 +16,15 @@ class VerifyAuthCode
      */
     public function handle($request, Closure $next)
     {
-        $authCode = Passport::authCode()->find(request()->code);
+        $token = Passport::token()->find($request->bearerToken());
 
-        if (is_null($authCode)) {
+        if (is_null($token)) {
             return response()->json([
                 'success' => false,
             ], 401);
         }
 
-        if ($authCode->client_id != $request->client_id || $authCode->revoked || Carbon\Carbon::now() > Carbon\Carbon::parse($authCode->expires_at)) {
+        if ($token->revoked || Carbon\Carbon::now() > Carbon\Carbon::parse($token->expires_at)) {
             return response()->json([
                 'success' => false,
             ], 401);

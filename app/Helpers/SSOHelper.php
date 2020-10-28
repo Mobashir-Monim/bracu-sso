@@ -74,15 +74,6 @@ class SSOHelper extends Helper
         ];
     }
 
-    public function convertToJWT($payload, $secret)
-    {
-        $header = $this->base64url_encode(json_encode(['alg' => 'HS256', 'typ' => 'JWT']));
-        $payload = $this->base64url_encode(json_encode($payload));
-        $signature = hash_hmac('sha256', $header . '.' . $payload, $secret, false);
-
-        return $header . '.' . $payload . '.' . $signature;
-    }
-
     public function createAuthCode($val, $passportAuthCode)
     {
         return $passportAuthCode->create([
