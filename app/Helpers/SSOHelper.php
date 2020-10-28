@@ -75,7 +75,7 @@ class SSOHelper extends Helper
 
     public function convertToJWT($payload, $secret)
     {
-        dd($payload);
+        dd(json_encode($payload));
         $header = $this->base64url_encode(json_encode([
             'alg' => 'HS256',
             'typ' => 'JWT',
