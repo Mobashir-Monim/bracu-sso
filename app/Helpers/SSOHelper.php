@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Auth;
 use Carbon\Carbon;
 use Larave\Passport\Passport;
 use App\ResourceGroup;
