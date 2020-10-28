@@ -91,7 +91,7 @@ class SSOHelper extends Helper
             'nonce' => $val->nonce,
             'scopes' => is_null($val->scope) ? null : json_encode(explode(' ', $val->scope)),
             'revoked' => false,
-            'expires_at' => Carbon::now()->aSeconds(60)
+            'expires_at' => Carbon::now()->addSeconds(60)
         ]);
     }
 
