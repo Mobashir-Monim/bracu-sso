@@ -80,7 +80,7 @@ class SSOController extends Controller
 
     public function jwksDoc()
     {
-        $key = file_get_contents("../storage/oauth-private.key");
+        $key = file_get_contents("../storage/oauth-public.key");
         $data = openssl_pkey_get_private($key);
         $data = openssl_pkey_get_details($data);
 
