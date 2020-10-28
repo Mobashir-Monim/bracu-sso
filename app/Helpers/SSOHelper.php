@@ -114,13 +114,13 @@ class SSOHelper extends Helper
         $key = file_get_contents("../storage/oauth-private.key");
         $payload = $this->generateIDToken($auth_code, $access_token);
 
-        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), request()->client_secret), json_encode($payload));
+        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), $this->base64url_encode(request()->client_secret)), json_encode($payload), $this->base64url_encode(request()->client_secret));
 
         return [
             'access_token' => $access_token->id,
             'token_type' => 'Bearer',
             'expires_in' => 604800,
-            'id_token' => $this->convertToJWT($this->generateIDToken($auth_code, $access_token), request()->client_secret),
+            'id_token' => $this->convertToJWT($this->generateIDToken($auth_code, $access_token), $this->base64url_encode(request()->client_secret)),
         ];
     }
 
