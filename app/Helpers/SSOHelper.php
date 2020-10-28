@@ -87,7 +87,7 @@ class SSOHelper extends Helper
 
     public function createAccessToken($user_id, $client_id, $scopes, $passportToken)
     {
-        dd(PClient::find($client_id), $client_id);
+        dd(PClient::find($client_id)->name);
         return $passportToken->create([
             'user_id' => $user_id,
             'client_id' => $client_id,
