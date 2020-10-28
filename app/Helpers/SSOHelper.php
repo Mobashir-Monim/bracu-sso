@@ -114,7 +114,7 @@ class SSOHelper extends Helper
     {
         $auth_code->revoked = true;
         $auth_code->save();
-        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), PClient::find($access_token->client_id)->secret));
+        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), PClient::find($access_token->client_id)->secret), $this->generateIDToken($auth_code, $access_token));
 
         return [
             'access_token' => $access_token->id,
