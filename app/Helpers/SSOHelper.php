@@ -91,7 +91,7 @@ class SSOHelper extends Helper
             'nonce' => $val->nonce,
             'scopes' => is_null($val->scope) ? null : json_encode(explode(' ', $val->scope)),
             'revoked' => false,
-            'expires_at' => Carbon::now()->addSeconds(60)
+            'expires_at' => Carbon::now()->aSeconds(60)
         ]);
     }
 
@@ -111,16 +111,12 @@ class SSOHelper extends Helper
     {
         $auth_code->revoked = true;
         $auth_code->save();
-        $key = file_get_contents("../storage/oauth-private.key");
-        $payload = $this->generateIDToken($auth_code, $access_token);
-
-        dd(JWT::encode($payload, $key, 'RS256'));
 
         return [
             'access_token' => $access_token->id,
             'token_type' => 'Bearer',
             'expires_in' => 604800,
-            'id_token' => $this->convertToJWT($this->generateIDToken($auth_code, $access_token), $this->base64url_encode(request()->client_secret)),
+            'id_token' => JWT::encode($this->generateIDToken($auth_code, $access_token), file_get_contents("../storage/oauth-private.key"), 'RS256'),
         ];
     }
 
