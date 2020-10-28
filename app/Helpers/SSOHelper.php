@@ -114,7 +114,7 @@ class SSOHelper extends Helper
         $key = file_get_contents("../storage/oauth-private.key");
         $payload = $this->generateIDToken($auth_code, $access_token);
 
-        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), $this->base64url_encode(request()->client_secret)), json_encode($payload), $this->base64url_encode(request()->client_secret));
+        dd(JWT::encode($payload, $key, 'RS256'));
 
         return [
             'access_token' => $access_token->id,
