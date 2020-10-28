@@ -75,7 +75,7 @@ class SSOHelper extends Helper
 
     public function convertToJWT($payload, $secret)
     {
-        dd($this->base64url_encode(json_encode($payload)), $this->base64url_encode(json_encode(`{"iss":"http://sso.eveneer.xyz","azp":"80473148-44a6-47f3-b446-ea014dfc4fea","aud":"80473148-44a6-47f3-b446-ea014dfc4fea","sub":"c86a03d6-cb30-44f0-b11a-346d8bcbc388","at_hash":"e6fad3c0fa7070e9352cd317954826fcf310f4eea1932f1e5c8b789f863f3cb7","iat":1603893226,"exp":1604498026,"nonce":null}`)));
+        dd($this->base64url_encode(json_encode(`{"iss":"http://sso.eveneer.xyz","azp":"80473148-44a6-47f3-b446-ea014dfc4fea","aud":"80473148-44a6-47f3-b446-ea014dfc4fea","sub":"c86a03d6-cb30-44f0-b11a-346d8bcbc388","at_hash":"e6fad3c0fa7070e9352cd317954826fcf310f4eea1932f1e5c8b789f863f3cb7","iat":1603893226,"exp":1604498026,"nonce":null}`)));
         $header = $this->base64url_encode(json_encode([
             'alg' => 'HS256',
             'typ' => 'JWT',
@@ -83,7 +83,6 @@ class SSOHelper extends Helper
 
         $payload = $this->base64url_encode(json_encode($payload));
         $signature = hash_hmac('sha256', $header . '.' . $payload, $secret);
-
 
         return $header . '.' . $payload . '.' . $signature;
     }
@@ -159,3 +158,4 @@ class SSOHelper extends Helper
 
 // eyJpc3MiOiJodHRwOlwvXC9zc28uZXZlbmVlci54eXoiLCJhenAiOiI4MDQ3MzE0OC00NGE2LTQ3ZjMtYjQ0Ni1lYTAxNGRmYzRmZWEiLCJhdWQiOiI4MDQ3MzE0OC00NGE2LTQ3ZjMtYjQ0Ni1lYTAxNGRmYzRmZWEiLCJzdWIiOiJjODZhMDNkNi1jYjMwLTQ0ZjAtYjExYS0zNDZkOGJjYmMzODgiLCJhdF9oYXNoIjoiOGQyNWFlZDE0ZTEzM2RhZTIxZjk5ZjFhN2VhNzNiZTNjZDUwYWZiZGJmM2FmZGYyM2QyNDA0ZDE1MGE3NThjYiIsImlhdCI6MTYwMzg5MjIwMSwiZXhwIjoxNjA0NDk3MDAxLCJub25jZSI6bnVsbH0
 // eyJpc3MiOiJodHRwOi8vc3NvLmV2ZW5lZXIueHl6IiwiYXpwIjoiODA0NzMxNDgtNDRhNi00N2YzLWI0NDYtZWEwMTRkZmM0ZmVhIiwiYXVkIjoiODA0NzMxNDgtNDRhNi00N2YzLWI0NDYtZWEwMTRkZmM0ZmVhIiwic3ViIjoiYzg2YTAzZDYtY2IzMC00NGYwLWIxMWEtMzQ2ZDhiY2JjMzg4IiwiYXRfaGFzaCI6IjhkMjVhZWQxNGUxMzNkYWUyMWY5OWYxYTdlYTczYmUzY2Q1MGFmYmRiZjNhZmRmMjNkMjQwNGQxNTBhNzU4Y2IiLCJpYXQiOjE2MDM4OTIyMDEsImV4cCI6MTYwNDQ5NzAwMSwibm9uY2UiOm51bGx9
+// eyJpc3MiOiJodHRwOlwvXC9zc28uZXZlbmVlci54eXoiLCJhenAiOiI4MDQ3MzE0OC00NGE2LTQ3ZjMtYjQ0Ni1lYTAxNGRmYzRmZWEiLCJhdWQiOiI4MDQ3MzE0OC00NGE2LTQ3ZjMtYjQ0Ni1lYTAxNGRmYzRmZWEiLCJzdWIiOiJjODZhMDNkNi1jYjMwLTQ0ZjAtYjExYS0zNDZkOGJjYmMzODgiLCJhdF9oYXNoIjoiYTNkMzU4M2EwYWEyYmUwNzMxZDQzNDUzYzE1Y2Y3MjAwYjVjMmFiNTA3YTA2MGJhYzA4YmFiZGExNDJhOTMzZiIsImlhdCI6MTYwMzg5MzMyMiwiZXhwIjoxNjA0NDk4MTIyLCJub25jZSI6bnVsbH0
