@@ -75,12 +75,13 @@ class SSOHelper extends Helper
 
     public function convertToJWT($arr)
     {
+        $key = file_get_contents("../storage/oauth-private.key");
         $header = $this->base64url_encode(json_encode([
             'alg' => 'HS256',
             'typ' => 'JWT',
         ]));
         $payload = $this->base64url_encode(json_encode($arr));
-        $signature = hash_hmac('sha256', $header . '.' . $payload);
+        $signature = hash_hmac('sha256', $header . '.' . $payload, $key);
 
 
         return $header . '.' . $payload . '.' . $signature;
