@@ -44,6 +44,7 @@ class SSOController extends Controller
 
     public function exchangeCodeToken()
     {
+        dd(request());
         $helper = new SSOHelper;
         $auth_code = Passport::authCode()->find(request()->code);
         $access_token = $helper->createAccessToken($auth_code->user_id, $auth_code->client_id, $auth_code->scopes, Passport::token());
