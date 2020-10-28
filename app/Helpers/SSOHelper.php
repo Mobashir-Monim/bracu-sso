@@ -75,14 +75,13 @@ class SSOHelper extends Helper
 
     public function convertToJWT($payload, $secret)
     {
-        dd($this->base64url_encode(json_encode(`{"iss":"http://sso.eveneer.xyz","azp":"80473148-44a6-47f3-b446-ea014dfc4fea","aud":"80473148-44a6-47f3-b446-ea014dfc4fea","sub":"c86a03d6-cb30-44f0-b11a-346d8bcbc388","at_hash":"e6fad3c0fa7070e9352cd317954826fcf310f4eea1932f1e5c8b789f863f3cb7","iat":1603893226,"exp":1604498026,"nonce":null}`)));
         $header = $this->base64url_encode(json_encode([
             'alg' => 'HS256',
             'typ' => 'JWT',
         ]));
 
         $payload = $this->base64url_encode(json_encode($payload));
-        $signature = hash_hmac('sha256', $header . '.' . $payload, $secret);
+        $signature = hash_hmac('sha256', $header . '.' . $payload, $secret, true);
 
         return $header . '.' . $payload . '.' . $signature;
     }
