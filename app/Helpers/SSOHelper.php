@@ -87,12 +87,11 @@ class SSOHelper extends Helper
 
     public function createAccessToken($user_id, $client_id, $scopes, $passportToken)
     {
-        dd(PClient::find($client_id)->name);
         return $passportToken->create([
             'user_id' => $user_id,
             'client_id' => $client_id,
             'scopes' => $scopes,
-            'name' => 'SSO login for ' . ResourceGroup::find($client_id)->name,
+            'name' => 'SSO login for ' . PClient::find($client_id)->name,
             'expires_at' => Carbon::now()->addSeconds(604800)->toDateTimeString(),
             'revoked' => false
         ]);
