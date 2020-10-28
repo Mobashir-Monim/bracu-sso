@@ -67,8 +67,8 @@ class SSOHelper extends Helper
             "aud" => $access_token->client_id,
             "sub" => $access_token->user_id,
             "at_hash" => hash('sha256', $access_token->id),
-            "iat" => Carbon::now()->timestamp,
-            "exp" => Carbon::now()->timestamp + 604800,
+            "iat" => Carbon::parse($access_token->created_at)->timestamp,
+            "exp" => Carbon::parse($access_token->expires_at)->timestamp,
             "nonce" => $auth_code->nonce,
         ];
     }
@@ -150,7 +150,3 @@ class SSOHelper extends Helper
         return $user_info;
     }
 }
-
-// eyJpc3MiOiJodHRwOlwvXC9zc28uZXZlbmVlci54eXoiLCJhenAiOiI4MDQ3MzE0OC00NGE2LTQ3ZjMtYjQ0Ni1lYTAxNGRmYzRmZWEiLCJhdWQiOiI4MDQ3MzE0OC00NGE2LTQ3ZjMtYjQ0Ni1lYTAxNGRmYzRmZWEiLCJzdWIiOiJjODZhMDNkNi1jYjMwLTQ0ZjAtYjExYS0zNDZkOGJjYmMzODgiLCJhdF9oYXNoIjoiOGQyNWFlZDE0ZTEzM2RhZTIxZjk5ZjFhN2VhNzNiZTNjZDUwYWZiZGJmM2FmZGYyM2QyNDA0ZDE1MGE3NThjYiIsImlhdCI6MTYwMzg5MjIwMSwiZXhwIjoxNjA0NDk3MDAxLCJub25jZSI6bnVsbH0
-// eyJpc3MiOiJodHRwOi8vc3NvLmV2ZW5lZXIueHl6IiwiYXpwIjoiODA0NzMxNDgtNDRhNi00N2YzLWI0NDYtZWEwMTRkZmM0ZmVhIiwiYXVkIjoiODA0NzMxNDgtNDRhNi00N2YzLWI0NDYtZWEwMTRkZmM0ZmVhIiwic3ViIjoiYzg2YTAzZDYtY2IzMC00NGYwLWIxMWEtMzQ2ZDhiY2JjMzg4IiwiYXRfaGFzaCI6IjhkMjVhZWQxNGUxMzNkYWUyMWY5OWYxYTdlYTczYmUzY2Q1MGFmYmRiZjNhZmRmMjNkMjQwNGQxNTBhNzU4Y2IiLCJpYXQiOjE2MDM4OTIyMDEsImV4cCI6MTYwNDQ5NzAwMSwibm9uY2UiOm51bGx9
-// eyJpc3MiOiJodHRwOlwvXC9zc28uZXZlbmVlci54eXoiLCJhenAiOiI4MDQ3MzE0OC00NGE2LTQ3ZjMtYjQ0Ni1lYTAxNGRmYzRmZWEiLCJhdWQiOiI4MDQ3MzE0OC00NGE2LTQ3ZjMtYjQ0Ni1lYTAxNGRmYzRmZWEiLCJzdWIiOiJjODZhMDNkNi1jYjMwLTQ0ZjAtYjExYS0zNDZkOGJjYmMzODgiLCJhdF9oYXNoIjoiYTNkMzU4M2EwYWEyYmUwNzMxZDQzNDUzYzE1Y2Y3MjAwYjVjMmFiNTA3YTA2MGJhYzA4YmFiZGExNDJhOTMzZiIsImlhdCI6MTYwMzg5MzMyMiwiZXhwIjoxNjA0NDk4MTIyLCJub25jZSI6bnVsbH0
