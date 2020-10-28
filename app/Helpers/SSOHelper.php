@@ -73,15 +73,14 @@ class SSOHelper extends Helper
         ];
     }
 
-    public function convertToJWT($arr)
+    public function convertToJWT($payload, $secret)
     {
-        $key = file_get_contents("../storage/oauth-private.key");
         $header = $this->base64url_encode(json_encode([
             'alg' => 'HS256',
             'typ' => 'JWT',
         ]));
-        $payload = $this->base64url_encode(json_encode($arr));
-        $signature = hash_hmac('sha256', $header . '.' . $payload, $key);
+        $payload = $this->base64url_encode(json_encode($payload));
+        $signature = hash_hmac('sha256', $header . '.' . $payload, $secret);
 
 
         return $header . '.' . $payload . '.' . $signature;
@@ -120,7 +119,7 @@ class SSOHelper extends Helper
             'access_token' => $access_token->id,
             'token_type' => 'Bearer',
             'expires_in' => 604800,
-            'id_token' => $this->convertToJWT($this->generateIDToken($auth_code, $access_token)),
+            'id_token' => $this->convertToJWT($this->generateIDToken($auth_code, $access_token), PClient::find($access_token->client_id)->secret),
         ];
     }
 
