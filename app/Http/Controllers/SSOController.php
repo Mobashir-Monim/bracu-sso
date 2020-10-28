@@ -39,7 +39,7 @@ class SSOController extends Controller
 
         $val = $helper->authenticatorParamDecompressor($request->stuff);
 
-        return redirect($val->redirect_uri . '?state=' . $val->state . '&code=' . $helper->createAuthCode($val, Passport::authCode()) . '&scope=' . $val->scope);
+        return redirect($val->redirect_uri . '?state=' . $val->state . '&code=' . $helper->createAuthCode($val, Passport::authCode())->id . '&scope=' . $val->scope);
     }
 
     public function exchangeCodeToken()
