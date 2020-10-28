@@ -110,7 +110,7 @@ class SSOHelper extends Helper
     {
         $auth_code->revoked = true;
         $auth_code->save();
-        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), file_get_contents("../storage/oauth-public.key")), file_get_contents("../storage/oauth-public.key"), $this->generateIDToken($auth_code, $access_token));
+        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), file_get_contents("../storage/oauth-public.key")), file_get_contents("../storage/oauth-public.key"), json_encode($this->generateIDToken($auth_code, $access_token)));
 
         return [
             'access_token' => $access_token->id,
