@@ -75,13 +75,9 @@ class SSOHelper extends Helper
 
     public function convertToJWT($payload, $secret)
     {
-        $header = $this->base64url_encode(json_encode([
-            'alg' => 'HS256',
-            'typ' => 'JWT',
-        ]));
-
+        $header = $this->base64url_encode(json_encode(['alg' => 'HS256', 'typ' => 'JWT']));
         $payload = $this->base64url_encode(json_encode($payload));
-        $signature = hash_hmac('sha256', $header . '.' . $payload, $secret, true);
+        $signature = hash_hmac('sha256', $header . '.' . $payload, $secret, false);
 
         return $header . '.' . $payload . '.' . $signature;
     }
@@ -114,7 +110,7 @@ class SSOHelper extends Helper
     {
         $auth_code->revoked = true;
         $auth_code->save();
-        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), file_get_contents("../storage/oauth-public.key")), $this->generateIDToken($auth_code, $access_token));
+        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), file_get_contents("../storage/oauth-public.key")));
 
         return [
             'access_token' => $access_token->id,
