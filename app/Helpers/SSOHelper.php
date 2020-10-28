@@ -67,8 +67,9 @@ class SSOHelper extends Helper
 
     public function createAuthCode($val, $passportAuthCode)
     {
+        dd(auth()->user()->id);
         return $passportAuthCode->create([
-            'user_id' => auth()->user(),
+            'user_id' => auth()->user()->id,
             'client_id' => $val->client_id,
             'nonce' => $val->nonce,
             'scopes' => is_null($val->scope) ? null : json_encode(explode(' ', $val->scope)),
