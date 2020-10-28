@@ -9,6 +9,7 @@ use App\ResourceGroup;
 use App\User;
 use App\PToken;
 use App\PClient;
+use \Firebase\JWT\JWT;
 
 class SSOHelper extends Helper
 {
@@ -110,6 +111,10 @@ class SSOHelper extends Helper
     {
         $auth_code->revoked = true;
         $auth_code->save();
+        $key = file_get_contents("../storage/oauth-private.key");
+        $payload = $this->generateIDToken($auth_code, $access_token);
+
+        dd($this->convertToJWT($this->generateIDToken($auth_code, $access_token), request()->client_secret), json_encode($payload));
 
         return [
             'access_token' => $access_token->id,
