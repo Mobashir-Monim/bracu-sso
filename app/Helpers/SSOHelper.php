@@ -81,6 +81,7 @@ class SSOHelper extends Helper
         ]));
 
         $payload = $this->base64url_encode(json_encode($payload));
+        dd($payload);
         $signature = hash_hmac('sha256', $header . '.' . $payload, $secret, true);
 
         return $header . '.' . $payload . '.' . $signature;
